@@ -36,5 +36,8 @@
   "bugs": {
     "url": "https://github.com/blinky3713/internet-faucet/issues"
   },
-  "homepage": "https://github.com/blinky3713/internet-faucet#readme"
+  "homepage": "https://github.com/blinky3713/internet-faucet#readme",
+  "dependencies": {
+    "fortmatic": "^0.7.2"
+  }
 }
