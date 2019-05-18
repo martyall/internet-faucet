@@ -7,6 +7,7 @@
     "build-purs": "pulp build",
     "compile-contracts": "chanterelle compile",
     "generate-contracts-ffi": "chanterelle codegen",
+    "postinstall": "bower install && npm run build-purs && npm run compile-contracts && npm run generate-contracts-ffi",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {

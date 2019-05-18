@@ -1,9 +1,12 @@
 # internet faucet
 
-## Build Instructions
+## Setup Instructions
 ```bash
 > npm i
-> bower i
-> npm run build-purs
-> npm run generate-contracts-ffi
 ```
+
+## Build Instructions
+```bash
+> npm run build-purs
+```
+
