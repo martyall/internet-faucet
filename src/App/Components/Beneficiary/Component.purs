@@ -1,13 +1,10 @@
-module App.Components.TransferNFT.Component where
+module App.Components.Beneficiary.Component where
 
 import Prelude
 
-import CSS as CSS
 import Effect.Aff.Class (class MonadAff)
 import Halogen as H
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
-import Halogen.HTML.Properties as HP
 import Data.Maybe (Maybe(..))
 
 type State =
@@ -41,7 +38,7 @@ component =
 
 render :: State -> HTML
 render {foo} =
-  HH.div_ [ HH.text $ show foo]
+  HH.div_ [ HH.text $ "Beneficiary"]
 
 eval
   :: forall m

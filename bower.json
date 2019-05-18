@@ -39,6 +39,7 @@
     "purescript-profunctor-lenses": "^4.0.0",
     "purescript-web-html": "^1.2.0",
     "purescript-web-uievents": "^1.1.0",
+    "purescript-routing-duplex": "^0.2.0",
     "purescript-aff-bus": "^4.0.0"
   },
   "devDependencies": {

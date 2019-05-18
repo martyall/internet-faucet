@@ -1,16 +1,21 @@
 module Main where
 
 import Prelude
-import Effect (Effect)
-import App.Wiring as Wiring
+
 import App.Component as App
+import App.Route as Route
+import App.Wiring as Wiring
+import Control.Monad.Reader (runReaderT)
+import Data.Maybe (Maybe(..), isJust)
+import Effect (Effect)
+import Effect.Aff (launchAff_)
+import Halogen (liftEffect)
 import Halogen as H
 import Halogen.Aff as HA
-import Web.DOM.ParentNode (QuerySelector(..))
-import Data.Maybe (Maybe(..))
-import Partial.Unsafe (unsafeCrashWith)
 import Halogen.VDom.Driver (runUI)
-import Control.Monad.Reader (runReaderT)
+import Partial.Unsafe (unsafeCrashWith)
+import Routing.Hash (matchesWith)
+import Web.DOM.ParentNode (QuerySelector(..))
 
 main :: Effect Unit
 main = HA.runHalogenAff do
@@ -21,5 +26,10 @@ main = HA.runHalogenAff do
       unsafeCrashWith "div#app has to be defined"
     Just el' -> do
       wiring <- Wiring.make
-      driver <- runUI (H.hoist (flip runReaderT wiring) App.component) unit el'
-      pure unit
+      initialRoute <- Route.currentRoute
+      io <- runUI (H.hoist (flip runReaderT wiring) App.component) initialRoute el'
+      liftEffect $ matchesWith Route.parse \old new -> do
+        -- NOTE: old is Nothing on initial call, so by using this guard we
+        -- make sure newRoute is dispatched only on actual route change
+        when (isJust old) do
+          launchAff_ $ io.query $ App.NewInput new unit
