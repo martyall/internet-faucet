@@ -13,5 +13,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "purescript-chanterelle": "f-o-a-m/chanterelle#v2.0.2"
+  }
 }
