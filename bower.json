@@ -1,0 +1,17 @@
+{
+  "name": "internet-faucet",
+  "homepage": "https://github.com/blinky3713/internet-faucet",
+  "authors": [
+    "Martin Allen <blinky@foam.space>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

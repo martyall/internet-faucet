@@ -1,0 +1,14 @@
+/bower_components/
+/node_modules/
+/.pulp-cache/
+/.cache/
+/output/
+/.psc-package/
+package-lock.json
+/.psc*
+/.purs*
+/.psa*
+/abis/**/*.json
+*.swp
+chanterelle.js
+cliquebait-generated.json
