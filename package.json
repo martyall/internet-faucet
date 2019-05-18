@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-purs": "pulp build",
+    "postinstall": "bower install && npm run build-purs && npm run generate-contracts-ffi",
     "generate-contracts-ffi": "chanterelle codegen",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
