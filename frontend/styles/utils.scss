@@ -1,0 +1,108 @@
+@import "settings";
+
+//# ===POSITION===
+.u-transition {
+  transition: 0.25s;
+}
+
+//# ===CURSOR===
+
+.u-cursor-pointer { cursor: pointer; }
+.u-pointerEvents-none { pointer-events: none; }
+
+
+//# ===POSITION===
+
+.u-position-absolute { position: absolute; }
+.u-position-relative { position: relative; }
+.u-top-0 { top: 0; }
+.u-bottom-0 { bottom: 0; }
+.u-left-0 { left: 0; }
+.u-right-0 { right: 0; }
+
+
+//# ===OVERFLOW===
+
+.u-overflow-hidden { overflow: hidden; }
+.u-overflow-auto { overflow: auto; }
+
+.u-break-word {
+  word-wrap: break-word;
+}
+
+//# ===BORDER===
+
+@include utils('.u-borderRadius-', (border-radius), $borderRadius, (hover, active, focus));
+.u-border-pill { border-radius: 999rem; }
+
+.u-outline-none:focus { outline: none; }
+
+//# ===SHADOWS===
+
+@include utils('.u-shadow-', (box-shadow), $shadow, (hover, active, focus));
+
+
+// sass-lint:disable indentation
+@include utils('.u-display-', (display), (
+  none: none,
+  flex: flex,
+  block: block,
+  inlineFlex: inline-flex,
+  inlineBlock: inline-block,
+));
+
+//# ===COLORS===
+
+@include utils('.u-backgroundColor-', (background-color), $color, (hover));
+@include utils('.u-color-', (color), $color, (hover));
+
+// sass-lint:disable indentation
+@include utils('.u-opacity', (opacity), (
+  1: 1,
+  '\\.5': 0.5,
+), (hover));
+
+
+//# ===TYPOGRAPHY===
+
+@include utils('.u-fontSize-', (font-size), $fontSize);
+@include utils('.u-lineHeight-', (line-height), $lineHeight);
+
+.u-font-monospace { font-family: Courier, monospace }
+
+.u-fontStyle-italic { font-style: italic; }
+
+.u-fontWeight-regular { font-weight: 400; } // default
+.u-fontWeight-medium { font-weight: 500; }
+.u-fontWeight-bold { font-weight: 700; }
+.u-fontWeight-black { font-weight: 900; }
+
+.u-verticalAlign-top { vertical-align: top; }
+.u-verticalAlign-bottom { vertical-align: bottom; }
+.u-textAlign-left { text-align: left; }
+.u-textAlign-right { text-align: right; }
+.u-textAlign-center { text-align: center; }
+
+.u-textDecoration-underline { text-decoration: underline; }
+.u-textDecoration-lineThrough { text-decoration: line-through; }
+.u-textTransform-capitalize { text-transform: capitalize; }
+
+
+// # ===MARGIN===
+
+@include utils('.u-margin-', (margin), $spacing);
+@include utils('.u-marginLeft-', (margin-left), $spacing);
+@include utils('.u-marginRight-', (margin-right), $spacing);
+@include utils('.u-marginTop-', (margin-top), $spacing);
+@include utils('.u-marginBottom-', (margin-bottom), $spacing);
+
+
+// # ===PADDING===
+
+@include utils('.u-padding-', (padding), $spacing);
+@include utils('.u-paddingLeft-', (padding-left), $spacing);
+@include utils('.u-paddingRight-', (padding-right), $spacing);
+@include utils('.u-paddingTop-', (padding-top), $spacing);
+@include utils('.u-paddingBottom-', (padding-bottom), $spacing);
+@include utils('.u-paddingVertical-', (padding-top, padding-bottom), $spacing);
+@include utils('.u-paddingHorizontal-', (padding-left, padding-right), $spacing);
