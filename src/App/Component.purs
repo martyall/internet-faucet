@@ -1,36 +1,32 @@
-module App.Component
-  ( component
-  , Query
-  ) where
+module App.Component where
 
 import Prelude
-import Halogen as H
+
+import App.Components.Beneficiary.Component as Beneficiary
+import App.Components.Donator.Component as Donator
 import App.Monad (M)
-import Halogen.HTML as HH
-import App.Components.MintNFT.Component as MintNFT
-import App.Components.TransferNFT.Component as TransferNFT
-import App.Components.YourNFT.Component as YourNFT
-import App.Components.InternetNFT.Component as InternetNFT
+import App.Route (Route(..))
+import App.Route as Route
+import Data.Either.Nested (Either2)
+import Data.Functor.Coproduct.Nested (Coproduct2)
 import Data.Maybe (Maybe(..))
-import Data.Either.Nested (Either4)
+import Halogen as H
 import Halogen.Component.ChildPath as CP
-import Data.Functor.Coproduct.Nested (Coproduct4)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
 
-type State = Unit
+type State = {route :: Route}
 
+type Input = Route
 data Query a
   = Initialize a
-  -- | RouteChange Route a
+  | NewInput Input a
 
-type ChildQuery = Coproduct4
-  MintNFT.Query
-  TransferNFT.Query
-  YourNFT.Query
-  InternetNFT.Query
+type ChildQuery = Coproduct2
+  Donator.Query
+  Beneficiary.Query
 
-type ChildSlot = Either4
-  Unit
-  Unit
+type ChildSlot = Either2
   Unit
   Unit
 
@@ -39,22 +35,30 @@ type DSL = H.ParentDSL State Query ChildQuery ChildSlot Void M
 type HTML = H.ParentHTML Query ChildQuery ChildSlot M
 
 render :: State -> HTML
-render _ = HH.div_
-    [ HH.slot' CP.cp1 unit MintNFT.component unit (const Nothing)
-    , HH.slot' CP.cp2 unit TransferNFT.component unit (const Nothing)
-    , HH.slot' CP.cp3 unit YourNFT.component unit (const Nothing)
-    , HH.slot' CP.cp4 unit InternetNFT.component unit (const Nothing)
-    ]
+render st = HH.div [HP.class_ $ H.ClassName "App"]
 
-component :: H.Component HH.HTML Query Unit Void M
+  [ navigation st.route
+  , case st.route of
+      Donator -> HH.slot' CP.cp1 unit Donator.component unit (const Nothing)
+      Beneficiary -> HH.slot' CP.cp2 unit Beneficiary.component unit (const Nothing)
+  ]
+  where
+  navigation currentRoute = HH.div [HP.class_ $ H.ClassName "Navigation"] $
+    [ Donator
+    , Beneficiary
+    ] <#> \route -> [HH.text $ show route] # if route == currentRoute
+            then HH.span_
+            else HH.a [Route.goTo route ]
+
+component :: H.Component HH.HTML Query Input Void M
 component =
   H.lifecycleParentComponent
-    { initialState: const unit
+    { initialState: {route:_}
     , render: render
     , eval
     , initializer: Just (H.action Initialize)
     , finalizer: Nothing
-    , receiver: const Nothing
+    , receiver: Just <<< H.action <<< NewInput
     }
 
 
@@ -62,6 +66,6 @@ eval :: Query ~> DSL
 eval = case _ of
   Initialize next -> do
     pure next
-  -- RouteChange route next -> do
-  --   H.modify_ $ map _{ route = route }
-  --   pure next
+  NewInput route next -> do
+    H.modify_ $ _{ route = route }
+    pure next

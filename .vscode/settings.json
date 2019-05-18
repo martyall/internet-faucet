@@ -5,10 +5,5 @@
   "purescript.sourcePath": "src",
   "purescript.editorMode": true,
   "purescript.addNpmPath": true,
-  "purescript.preludeModule": "Prelude",
-  "[makefile]": {
-    "editor.insertSpaces": false,
-    "editor.tabSize": 4,
-    "editor.useTabStops": true
-  }
+  "purescript.preludeModule": "Prelude"
 }

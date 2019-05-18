@@ -1,0 +1,17 @@
+.Donator {
+  ul {
+    padding: 10px 0;
+  }
+  li {
+    padding: 10px;
+  }
+}
+
+.Donator-action {
+  display: inline;
+  margin-left: 10px;
+  border: 1px solid silver;
+  padding: 5px;
+  border-radius: 5px;
+  &:hover { background:  silver}
+}
