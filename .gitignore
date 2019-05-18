@@ -10,5 +10,6 @@ package-lock.json
 /.psa*
 /abis/**/*.json
 *.swp
+/src/InternetFaucet/Contracts/
 chanterelle.js
 cliquebait-generated.json
