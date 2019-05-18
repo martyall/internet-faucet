@@ -1,0 +1,14 @@
+{
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.renderWhitespace": "boundary",
+  "purescript.buildCommand": "npm run -s build-purs-editor",
+  "purescript.sourcePath": "src",
+  "purescript.editorMode": true,
+  "purescript.addNpmPath": true,
+  "purescript.preludeModule": "Prelude",
+  "[makefile]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4,
+    "editor.useTabStops": true
+  }
+}

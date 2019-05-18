@@ -1,0 +1,76 @@
+
+@function _safe_read($dict, $key, $name) {
+  $res: map-get($dict, $key);
+  @if $res == null { @error "there is no #{$name} for key: #{$key}"; }
+  @return $res;
+}
+
+@function color($key) { @return _safe_read($color, $key, "color"); }
+@function spacing($key) { @return _safe_read($spacing, $key, "spacing"); }
+@function shadow($key) { @return _safe_read($shadow, $key, "shadow"); }
+@function borderRadius($key) { @return _safe_read($borderRadius, $key, "borderRadius"); }
+@function lineHeight($key) { @return _safe_read($lineHeight, $key, "lineHeight"); }
+@function fontSize($key) { @return _safe_read($fontSize, $key, "fontSize"); }
+
+$color: (
+  'black': hsl(0, 0%, 0%),
+  'white': hsl(0, 0%, 100%)
+);
+
+$shadow: (
+  s: 0.0rem 0.2rem 0.5rem rgba(color('black'), $alpha: 0.225),
+  m: 0.0rem 0.4rem 1.0rem rgba(color('black'), $alpha: 0.225),
+  l: 0.0rem 0.4rem 2.5rem rgba(color('black'), $alpha: 0.225)
+);
+
+$borderRadius: (
+  s: 0.5rem,
+  m: 1rem,
+  l: 2rem
+);
+
+$spacing: (
+  s: 0.5rem,
+  m: 1.0rem,
+  l: 2.0rem,
+  xl: 3.0rem,
+  xxl: 4.0rem
+);
+
+$lineHeight: (
+  s: 1, // default height
+  m: 1.25, // a bit more then 100% in sigma so for base 16px font we get 20px line height
+  l: 1.4375 // ~ 120% in sigma
+);
+
+
+$fontSize: (
+  xs: 1rem,
+  s: 1.2rem,
+  m: 1.6rem, // default size
+  l: 2rem,
+  xl: 2.4rem,
+  xxl: 4.0rem
+);
+
+// adopted from https://github.com/safareli/responsive-utils/blob/master/responsive-utils.scss
+@mixin util($selector, $pseudos) {
+  #{$selector} {
+    @content;
+  }
+  @each $pseudo in $pseudos {
+    #{$selector}\:#{$pseudo}:#{$pseudo} {
+      @content;
+    }
+  }
+}
+
+@mixin utils($name, $props, $values, $pseudos: ()) {
+  @each $valueName, $value in $values {
+    @include util(#{$name}#{$valueName}, $pseudos) {
+      @each $prop in $props {
+        #{$prop}: $value;
+      }
+    }
+  }
+}

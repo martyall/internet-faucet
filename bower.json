@@ -1,5 +1,6 @@
 {
   "name": "internet-faucet",
+  "private": true,
   "homepage": "https://github.com/blinky3713/internet-faucet",
   "authors": [
     "Martin Allen <blinky@foam.space>"
@@ -15,6 +16,32 @@
     "tests"
   ],
   "dependencies": {
-    "purescript-chanterelle": "f-o-a-m/chanterelle#v2.0.2"
+    "purescript-chanterelle": "f-o-a-m/chanterelle#v2.0.2",
+    "purescript-routing": "^8.0.0",
+    "purescript-halogen": "^4.0.0",
+    "purescript-record": "^1.0.0",
+    "purescript-prelude": "^4.0.0",
+    "purescript-web3": "^1.0.0",
+    "purescript-console": "^4.0.0",
+    "purescript-node-process": "^6.0.0",
+    "purescript-debug": "^4.0.0",
+    "purescript-logging": "^3.0.0",
+    "purescript-now": "^4.0.0",
+    "purescript-validation": "^4.0.0",
+    "purescript-aff": "^5.0.0",
+    "purescript-websocket-simple": "^3.0.0",
+    "purescript-eth-core": "^3.0.0",
+    "purescript-halogen-css": "^8.0.0",
+    "purescript-affjax": "^6.0.0",
+    "purescript-webstorage": "joneshf/purescript-webstorage#645c4e96149ca7e674d18ce54689c72b290b875d",
+    "purescript-formatters": "^4.0.0",
+    "purescript-semigroups": "safareli/purescript-semigroups#purescript/0.12",
+    "purescript-profunctor-lenses": "^4.0.0",
+    "purescript-web-html": "^1.2.0",
+    "purescript-web-uievents": "^1.1.0",
+    "purescript-aff-bus": "^4.0.0"
+  },
+  "devDependencies": {
+    "purescript-psci-support": "^4.0.0"
   }
 }
