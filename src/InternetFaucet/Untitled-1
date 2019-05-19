@@ -1,0 +1,21 @@
+  Could not match type
+
+    Array
+
+  with type
+
+    Record
+
+
+while trying to match type Array t0
+  with type { | t1 }
+while inferring the type of case (((maybe []) identity) (n.openSellOrders)) of
+                              { assetData: { nodes: orders } } -> { tokenId: ...
+                                                                  , owner: ...
+                                                                  , metadata: ...
+                                                                  , openOrders: ...
+                                                                  }
+in value declaration getAllTokensForAddress
+
+where t0 is an unknown type
+      t1 is an unknown type

@@ -32,7 +32,6 @@
     "purescript-websocket-simple": "^3.0.0",
     "purescript-eth-core": "^3.0.0",
     "purescript-halogen-css": "^8.0.0",
-    "purescript-affjax": "^6.0.0",
     "purescript-webstorage": "joneshf/purescript-webstorage#645c4e96149ca7e674d18ce54689c72b290b875d",
     "purescript-formatters": "^4.0.0",
     "purescript-semigroups": "safareli/purescript-semigroups#purescript/0.12",
@@ -40,7 +39,8 @@
     "purescript-web-html": "^1.2.0",
     "purescript-web-uievents": "^1.1.0",
     "purescript-routing-duplex": "^0.2.0",
-    "purescript-aff-bus": "^4.0.0"
+    "purescript-aff-bus": "^4.0.0",
+    "purescript-simple-gql-query":"Pixura/purescript-simple-gql-query#9d7b7a77c737f35e9619f16d41b27223bde6dcba"
   },
   "devDependencies": {
     "purescript-psci-support": "^4.0.0"
