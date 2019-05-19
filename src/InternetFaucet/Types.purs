@@ -3,12 +3,10 @@ module InternetFaucet.Types
   , Token
   ) where
 
-import Foreign (Foreign)
-
 type Token =
   { tokenId :: Number
   , owner :: String
-  , metadata :: Foreign
+  , awesomeLevel :: String
   , openOrders :: Array SignedOrder
   }
 

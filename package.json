@@ -53,6 +53,8 @@
   },
   "homepage": "https://github.com/blinky3713/internet-faucet#readme",
   "dependencies": {
-    "fortmatic": "^0.7.2"
+    "acorn": "^6.1.1",
+    "fortmatic": "^0.7.2",
+    "web3": "^1.0.0-beta.55"
   }
 }
