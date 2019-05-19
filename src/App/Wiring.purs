@@ -5,18 +5,34 @@ module App.Wiring
   where
 
 import Prelude
-import Effect.Aff.Bus as Bus
-import Effect.Class (class MonadEffect, liftEffect)
+
+import Data.Array (index)
+import Data.Either (Either(..))
+import Data.Maybe (Maybe(..))
+import Effect.Aff (Aff)
+import Effect.Class (liftEffect)
+import Effect.Exception (throw)
+import Fortmatic.Provider (fortmaticProvider)
+import Network.Ethereum.Web3 (Address, Provider, runWeb3)
+import Network.Ethereum.Web3.Api (eth_getAccounts)
+import Unsafe.Coerce (unsafeCoerce)
 
 type Wiring =
-  { provider :: Unit
+  { provider :: Provider
+  , userAddress :: Address
   }
 
 
-make
-  :: forall m
-   . MonadEffect m
-  => m Wiring
-make = liftEffect do
-  provider <- pure unit
-  pure { provider }
+make :: Aff Wiring
+make = do
+  provider <- liftEffect $ fortmaticProvider
+  userAddress <- getUserAddress $ unsafeCoerce provider
+  pure { provider, userAddress }
+  where
+    getUserAddress provider = do
+      eUser <- runWeb3 provider $ eth_getAccounts
+      case eUser of
+        Left err -> liftEffect $ throw $ show $ err
+        Right accounts -> case accounts `index` 0 of
+          Nothing -> liftEffect $ throw "No primary account found from Metamask provider."
+          Just userAddress -> pure userAddress

@@ -5,11 +5,14 @@ module InternetFaucet.GetData
 
 import Prelude
 
-import Affjax.ResponseFormat (ResponseFormat(..))
+import Control.Monad.Except (runExcept)
+import Data.Either (either)
 import Data.Maybe (Maybe(..), maybe)
 import Effect.Aff (Aff)
 import Effect.Class (liftEffect)
 import Effect.Exception (throw)
+import Foreign (readString)
+import Foreign.Index (index)
 import InternetFaucet.Queries (allTokens)
 import InternetFaucet.Types (Token)
 import Simple.Graphql.Query (runQuery)
@@ -31,11 +34,14 @@ getAllTokensForAddress address = do
         nodes
       }
     } -> pure $ nodes <#> \n ->
-          let orders = maybe [] (_.assetData.nodes >>> map _.signedOrder) n.openSellOrders
-          in { tokenId: n.tokenId
-              , owner: n.owner.address
-              , metadata: n.details.metadata
-              , openOrders: orders
-              }
+        let
+          orders = maybe [] (_.assetData.nodes >>> map _.signedOrder) n.openSellOrders
+          (awesomeLevel :: String) = either (const "") identity $ runExcept (index n.details.metadata "awesomeLevel" >>= readString)
+        in
+          { tokenId: n.tokenId
+          , owner: n.owner.address
+          , awesomeLevel
+          , openOrders: orders
+          }
 
 

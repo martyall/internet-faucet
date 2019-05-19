@@ -30,7 +30,6 @@ type State =
 
 data Query a
   = Initialize a
-  | NewInput Input a
   | DonateService Service a
 
 type Message = Unit
@@ -50,7 +49,7 @@ component =
     , eval
     , initializer: Just (H.action Initialize)
     , finalizer: Nothing
-    , receiver: Just <<< H.action <<< NewInput
+    , receiver: const Nothing
     }
 
 render :: State -> HTML
@@ -103,6 +102,4 @@ eval = case _ of
     setBuyState Donating
     H.liftAff $ delay $ Milliseconds 2000.0
     setBuyState $ Idle $ Just $ Right "0xaaaaaasdasd1231qweads"
-    pure next
-  NewInput unit next -> do
     pure next
