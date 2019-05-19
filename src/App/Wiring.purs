@@ -5,11 +5,14 @@ module App.Wiring
   where
 
 import Prelude
-import Effect.Aff.Bus as Bus
+
+-- import Effect.Aff.Bus as Bus
 import Effect.Class (class MonadEffect, liftEffect)
+import Fortmatic.Provider (fortmaticProvider)
+import Network.Ethereum.Web3 (Provider)
 
 type Wiring =
-  { provider :: Unit
+  { web3Provider :: Provider
   }
 
 
@@ -18,5 +21,5 @@ make
    . MonadEffect m
   => m Wiring
 make = liftEffect do
-  provider <- pure unit
-  pure { provider }
+  web3Provider <- fortmaticProvider
+  pure { web3Provider }
